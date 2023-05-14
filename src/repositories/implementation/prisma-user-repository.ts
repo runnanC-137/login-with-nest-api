@@ -16,8 +16,39 @@ export class PrismaUserRepository implements UserRepository {
     });
     return savedUserInPrisma;
   }
-  async findAll(): Promise<User[]> {
-    const users = this.prisma.user.findMany();
+  async read(userId: string): Promise<User> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+    return user;
+  }
+  async readByEmail(email?: string): Promise<User> {
+    const user = await this.prisma.user.findUnique({
+      where: { email: email },
+    });
+    return user;
+  }
+  async readAll(): Promise<User[]> {
+    const users = await this.prisma.user.findMany();
     return users;
+  }
+  async update(user: User): Promise<User> {
+    const { name, id } = user;
+    const users = await this.prisma.user.update({
+      where: { id },
+      data: {
+        name,
+      },
+    });
+    return users;
+  }
+  async delete(userId: string): Promise<void> {
+    await this.prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
   }
 }
