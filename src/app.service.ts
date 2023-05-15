@@ -39,17 +39,4 @@ export class AppService {
   async delete({ id }: DeleteUserRequestBody) {
     await this.userRepository.delete(id);
   }
-  /*async readByEmail() {
-    const user = 'name + email;';
-    return user;
-  }
-  async readAll() {
-    const user = 'name + email;';
-    return user;
-  }
-  
-  async delete() {
-    const user = 'name + email;';
-    return user;
-  } */
 }
