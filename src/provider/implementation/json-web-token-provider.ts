@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken';
+import { Injectable } from '@nestjs/common';
 import { TokenProvider } from '../token-provider';
+
+@Injectable()
 export class JsonWebTokenProvider implements TokenProvider {
   createToken(payload: object): string {
     const token = jwt.sign(payload, 233, { expiresIn: 3434 });
