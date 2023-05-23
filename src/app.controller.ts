@@ -9,10 +9,10 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { User } from './entities/user-entities';
-import { CreateUserRequestBody } from './dtos/create-user-request-body';
-import { ReadUserRequestBody } from './dtos/read-user-request-body';
-import { UpdateUserRequestBody } from './dtos/update-user-request-body';
-import { DeleteUserRequestBody } from './dtos/delete-user-request-body';
+import { CreateUserRequestBody } from './dtos/user-dto/create-user-request-body';
+import { ReadUserRequestBody } from './dtos/user-dto/read-user-request-body';
+import { UpdateUserRequestBody } from './dtos/user-dto/update-user-request-body';
+import { DeleteUserRequestBody } from './dtos/user-dto/delete-user-request-body';
 
 @Controller()
 export class AppController {

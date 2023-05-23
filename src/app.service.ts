@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserRequestBody } from './dtos/create-user-request-body';
+import { CreateUserRequestBody } from './dtos/user-dto/create-user-request-body';
 import { User } from './entities/user-entities';
 import { UserRepository } from './repositories/user-repository';
-import { ReadUserRequestBody } from './dtos/read-user-request-body';
-import { UpdateUserRequestBody } from './dtos/update-user-request-body';
-import { DeleteUserRequestBody } from './dtos/delete-user-request-body';
+import { ReadUserRequestBody } from './dtos/user-dto/read-user-request-body';
+import { UpdateUserRequestBody } from './dtos/user-dto/update-user-request-body';
+import { DeleteUserRequestBody } from './dtos/user-dto/delete-user-request-body';
 import { HashProvider } from './provider/hash-provider';
-import { UpdateUserPasswordRequestBody } from './dtos/update-user-password-resquest-body';
+import { UpdateUserPasswordRequestBody } from './dtos/user-dto/update-user-password-resquest-body';
 
 @Injectable()
 export class AppService {
@@ -38,8 +38,6 @@ export class AppService {
     return await this.userRepository.readAll()
   }
 
-  // readAll
-  // readMany
   async update(data: UpdateUserRequestBody): Promise<User> {
     const userExit = await this.userRepository.read(data.id)
     if (!userExit) {
