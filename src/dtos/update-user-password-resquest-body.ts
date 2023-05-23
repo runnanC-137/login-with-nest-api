@@ -1,12 +1,12 @@
 import { IsEmail, IsEmpty, IsNotEmpty, Length } from 'class-validator';
 
-export class UpdateUserRequestBody {
+export class UpdateUserPasswordRequestBody {
   @IsNotEmpty()
   id: string;
   
   @Length(4, 30)
-  name: string;
+  password: string;
 
   @Length(4, 30)
-  email: string;
+  newPassword: string;
 }

@@ -32,7 +32,7 @@ export class AppController {
     const user = await this.appService.read(params);
     return user;
   }
-  @Put()
+  @Put(':id')
   async update(@Body() body: UpdateUserRequestBody): Promise<User> {
     const user = await this.appService.update(body);
     return user;
