@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserRequestBody } from './dtos/user-dto/create-user-request-body';
-import { User } from './entities/user-entities';
-import { UserRepository } from './repositories/user-repository';
-import { ReadUserRequestBody } from './dtos/user-dto/read-user-request-body';
-import { UpdateUserRequestBody } from './dtos/user-dto/update-user-request-body';
-import { DeleteUserRequestBody } from './dtos/user-dto/delete-user-request-body';
-import { HashProvider } from './provider/hash-provider';
-import { UpdateUserPasswordRequestBody } from './dtos/user-dto/update-user-password-resquest-body';
+import { User } from '../entities/user-entities';
+import { UserRepository } from '../repositories/user-repository';
+import { CreateUserRequestBody } from '../user-dto/create-user-request-body';
+import { ReadUserRequestBody } from '../user-dto/read-user-request-body';
+import { UpdateUserRequestBody } from '../user-dto/update-user-request-body';
+import { DeleteUserRequestBody } from '../user-dto/delete-user-request-body';
+import { UpdateUserPasswordRequestBody } from '../user-dto/update-user-password-request-body';
+
+import { HashProvider } from '../provider/hash-provider';
 
 @Injectable()
-export class AppService {
+export class UserService {
   constructor(
     private userRepository: UserRepository,
     private hashProvider: HashProvider,

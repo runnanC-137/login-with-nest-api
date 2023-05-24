@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserRepository } from './repositories/user-repository';
 import { PrismaUserRepository } from './repositories/implementation/prisma-user-repository';
 import { HashProvider } from './provider/hash-provider';
 import { BcryptJsProvider } from './provider/implementation/bcrypt-js-provider';
+import { UserController } from './controllers/user.controller';
+import { UserService } from './services/user.service';
 
 @Module({
   imports: [],
-  controllers: [AppController],
+  controllers: [UserController],
   providers: [
-    AppService,
+    UserService,
     {
       provide: UserRepository,
       useClass: PrismaUserRepository,

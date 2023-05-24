@@ -13,3 +13,4 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     });
   }
 }
+export const prisma = new PrismaService() 
