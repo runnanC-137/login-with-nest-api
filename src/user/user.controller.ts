@@ -14,22 +14,34 @@ import { DeleteUserRequestBody } from './dto/delete-user-request-body';
 import { UpdateUserPasswordRequestBody } from './dto/update-user-password-request-body';
 import { UserService } from 'src/user/user.service';
 import { IUser } from './interfaces/user.interface';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
+import { User } from 'src/entities/user.entities';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Get('me')
+  async me(@CurrentUser() user: User): Promise<IUser> {
+    return user;
+  }
+
+  @IsPublic()
   @Post()
   async create(@Body() body: CreateUserRequestBody): Promise<IUser> {
     const user = await this.userService.create(body);
     return user;
   }
 
+  @IsPublic()
   @Get()
   async readAll(): Promise<IUser[]> {
     const users = await this.userService.readAll();
     return users;
   }
+
+  @IsPublic()
   @Get(':id')
   async read(@Param() params: ReadUserRequestParam): Promise<IUser> {
     const user = await this.userService.read(params);

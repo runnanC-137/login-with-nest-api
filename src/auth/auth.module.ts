@@ -7,6 +7,7 @@ import { UserRepository } from '../repositories/user-repository';
 import { PrismaUserRepository } from '../repositories/implementation/prisma-user-repository';
 import { HashProvider } from 'src/provider/hash-provider';
 import { BcryptJsProvider } from 'src/provider/implementation/bcrypt-js-provider';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { BcryptJsProvider } from 'src/provider/implementation/bcrypt-js-provider
   controllers: [AuthController],
   providers: [
     AuthService,
+    LocalStrategy,
     {
       provide: UserRepository,
       useClass: PrismaUserRepository,

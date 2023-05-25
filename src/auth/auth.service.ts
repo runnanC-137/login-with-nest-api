@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { UserRepository } from 'src/repositories/user-repository';
-import { UserInRequest } from './interfaces/user-in-request';
 import { HashProvider } from 'src/provider/hash-provider';
+import { UserInRequest } from './interfaces/user-in-request';
+import { UserPayload } from './interfaces/user-payload';
+import { UserToken } from './interfaces/user-token';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userRepository: UserRepository,
     private hashProvider: HashProvider,
+    private jwtService: JwtService,
   ) {}
   async validateUser(email: string, password: string) {
     const user = await this.userRepository.readByEmail(email);
@@ -28,5 +32,11 @@ export class AuthService {
 
     throw new Error('password or email provided is incorrect');
   }
-  async login(reqUser: UserInRequest) {}
+  login(user: UserInRequest): UserToken {
+    const payload: UserPayload = {
+      sub: user.id,
+    };
+    const token = this.jwtService.sign(payload);
+    return { token };
+  }
 }

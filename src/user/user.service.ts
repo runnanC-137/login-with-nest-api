@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../entities/user-entities';
+import { User } from '../entities/user.entities';
 import { IUser } from './interfaces/user.interface';
 import { UserRepository } from '../repositories/user-repository';
 import { HashProvider } from '../provider/hash-provider';
@@ -27,7 +27,7 @@ export class UserService {
     const user = await this.userRepository.create(userData);
     return {
       password: undefined,
-      ...user.data,
+      ...user,
     };
   }
 
@@ -38,7 +38,7 @@ export class UserService {
     }
     return {
       password: undefined,
-      ...user.data,
+      ...user,
     };
   }
 
@@ -46,7 +46,7 @@ export class UserService {
     return (await this.userRepository.readAll()).map((user) => {
       return {
         password: undefined,
-        ...user.data,
+        ...user,
       };
     });
   }
@@ -75,7 +75,7 @@ export class UserService {
     const updateUser = await this.userRepository.update(updateUserData);
     return {
       password: undefined,
-      ...updateUser.data,
+      ...updateUser,
     };
   }
 

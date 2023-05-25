@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 
 export class CreateUserRequestBody {
   @IsNotEmpty()
-  @Length(4, 30)
+  @Length(3, 30)
   name: string;
 
   @IsNotEmpty()
