@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
@@ -9,6 +9,7 @@ import { HashProvider } from 'src/provider/hash-provider';
 import { BcryptJsProvider } from 'src/provider/implementation/bcrypt-js-provider';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { LoginValidationMiddleware } from './middlewares/login-validation.middleware';
 
 @Module({
   imports: [
@@ -33,4 +34,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     },
   ],
 })
-export class AuthModule {}
+export class AuthModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoginValidationMiddleware).forRoutes('auth/login');
+  }
+}

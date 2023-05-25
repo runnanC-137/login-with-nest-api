@@ -7,11 +7,11 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { CreateUserRequestBody } from './dto/create-user-request-body';
-import { ReadUserRequestParam } from './dto/read-user-request-body';
-import { UpdateUserRequestBody } from './dto/update-user-request-body';
-import { DeleteUserRequestBody } from './dto/delete-user-request-body';
-import { UpdateUserPasswordRequestBody } from './dto/update-user-password-request-body';
+import { CreateUserRequestBody } from './dtos/create-user-request-body';
+import { ReadUserRequestParam } from './dtos/read-user-request-body';
+import { UpdateUserRequestBody } from './dtos/update-user-request-body';
+import { DeleteUserRequestBody } from './dtos/delete-user-request-body';
+import { UpdateUserPasswordRequestBody } from './dtos/update-user-password-request-body';
 import { UserService } from 'src/user/user.service';
 import { IUser } from './interfaces/user.interface';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
