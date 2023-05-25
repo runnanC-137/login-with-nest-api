@@ -8,6 +8,7 @@ import { PrismaUserRepository } from '../repositories/implementation/prisma-user
 import { HashProvider } from 'src/provider/hash-provider';
 import { BcryptJsProvider } from 'src/provider/implementation/bcrypt-js-provider';
 import { LocalStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { LocalStrategy } from './strategies/local.strategy';
   providers: [
     AuthService,
     LocalStrategy,
+    JwtStrategy,
     {
       provide: UserRepository,
       useClass: PrismaUserRepository,

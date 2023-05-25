@@ -1,3 +1,7 @@
 export interface UserFromJwt {
-  id: string;
+  id?: string;
+  name: string;
+  email: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
