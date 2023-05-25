@@ -16,6 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: UserPayload): Promise<UserFromJwt> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...user } = await this.userRepository.read(payload.sub);
     return user;
   }
