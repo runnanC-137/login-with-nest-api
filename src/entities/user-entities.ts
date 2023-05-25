@@ -1,66 +1,68 @@
 interface IUserProps {
-  id?: string
-  name: string
-  email: string
-  password?: string
-  createdAt?: Date
-  updatedAt?: Date
+  id?: string;
+  name: string;
+  email: string;
+  password?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export class User {
   constructor(private props: IUserProps) {
-    Object.assign(this.props, props)
+    Object.assign(this.props, props);
   }
 
   get data() {
-    return this.props
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...rest } = this.props;
+    return rest;
   }
 
   get id() {
-    return this.props.id ?? this.id
+    return this.props.id ?? this.id;
   }
 
   set id(id: string) {
-    this.props.id = id
+    this.props.id = id;
   }
 
   get name() {
-    return this.props.name
+    return this.props.name;
   }
 
   set name(name: string) {
-    this.props.name = name
+    this.props.name = name;
   }
 
   get email() {
-    return this.props.email
+    return this.props.email;
   }
 
   set email(email: string) {
-    this.props.email = email
+    this.props.email = email;
   }
 
   get password() {
-    return this.props.password ?? this.password
+    return this.props.password ?? this.password;
   }
 
   set password(password: string) {
-    this.props.password = password
+    this.props.password = password;
   }
 
   get createdAt() {
-    return this.props.createdAt ?? this.createdAt
+    return this.props.createdAt ?? this.createdAt;
   }
 
   set createdAt(createdAt: Date) {
-    this.props.createdAt = createdAt
+    this.props.createdAt = createdAt;
   }
 
   get updatedAt() {
-    return this.props.createdAt ?? this.updatedAt
+    return this.props.createdAt ?? this.updatedAt;
   }
 
   set updatedAt(updatedAt: Date) {
-    this.props.updatedAt = updatedAt
+    this.props.updatedAt = updatedAt;
   }
 }
