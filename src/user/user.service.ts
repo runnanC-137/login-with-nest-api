@@ -25,7 +25,10 @@ export class UserService {
     const hashPassword = this.hashProvider.hashPassword(data.password);
     userData.password = hashPassword;
     const user = await this.userRepository.create(userData);
-    return user.data;
+    return {
+      password: undefined,
+      ...user.data,
+    };
   }
 
   async read({ id }: ReadUserRequestParam): Promise<IUser> {
@@ -33,12 +36,18 @@ export class UserService {
     if (!user) {
       throw new Error('user not exist');
     }
-    return user.data;
+    return {
+      password: undefined,
+      ...user.data,
+    };
   }
 
   async readAll(): Promise<IUser[]> {
-    return (await this.userRepository.readAll()).map(({ data }) => {
-      return data;
+    return (await this.userRepository.readAll()).map((user) => {
+      return {
+        password: undefined,
+        ...user.data,
+      };
     });
   }
 
@@ -64,7 +73,10 @@ export class UserService {
       updatedAt: new Date(),
     });
     const updateUser = await this.userRepository.update(updateUserData);
-    return updateUser.data;
+    return {
+      password: undefined,
+      ...updateUser.data,
+    };
   }
 
   async updatePassword(data: UpdateUserPasswordRequestBody): Promise<void> {
