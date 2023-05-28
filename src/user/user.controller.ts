@@ -15,17 +15,16 @@ import { UpdateUserPasswordRequestBody } from './dtos/update-user-password-reque
 import { UserService } from 'src/user/user.service';
 import { IUser } from './interfaces/user.interface';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
-import { User } from 'src/entities/user.entities';
-import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+/* import { CurrentUser } from 'src/auth/decorators/current-user.decorator'; */
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Get('me')
+  /*   @Get('me')
   async me(@CurrentUser() user: User): Promise<IUser> {
     return user;
-  }
+  } */
 
   @IsPublic()
   @Post()
