@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   HttpCode,
   HttpStatus,
@@ -12,7 +13,10 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthRequest } from './interfaces/auth-request';
 import { Response } from 'express';
 import { IsPublic } from './decorators/is-public.decorator';
+import { ApiTags } from '@nestjs/swagger';
+import { LoginInSwaggerRequestBody } from './dtos/login-in-swagger-request-body.dto';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -21,7 +25,12 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  async login(@Req() req: AuthRequest, @Res() res: Response) {
+  async login(
+    @Req() req: AuthRequest,
+    @Res() res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    @Body() login: LoginInSwaggerRequestBody,
+  ) {
     const { token } = this.authService.login(req.user);
     res.setHeader('token', token);
     return res.json({ message: 'user logged' });
