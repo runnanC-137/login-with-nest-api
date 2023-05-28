@@ -3,11 +3,11 @@ import { User } from '../entities/user.entities';
 import { IUser } from './interfaces/user.interface';
 import { UserRepository } from '../repositories/user-repository';
 import { HashProvider } from '../provider/hash-provider';
-import { CreateUserRequestBody } from './dtos/create-user-request-body';
-import { ReadUserRequestParam } from './dtos/read-user-request-body';
-import { UpdateUserRequestBody } from './dtos/update-user-request-body';
-import { DeleteUserRequestBody } from './dtos/delete-user-request-body';
-import { UpdateUserPasswordRequestBody } from './dtos/update-user-password-request-body';
+import { CreateUserRequest } from './dtos/create-user-request.dto';
+import { ReadUserRequest } from './dtos/read-user-request.dto';
+import { UpdateUserRequest } from './dtos/update-user-request.dto';
+import { DeleteUserRequest } from './dtos/delete-user-request.dto';
+import { UpdateUserPasswordRequest } from './dtos/update-user-password-request.dto';
 
 @Injectable()
 export class UserService {
@@ -16,7 +16,7 @@ export class UserService {
     private hashProvider: HashProvider,
   ) {}
 
-  async create(data: CreateUserRequestBody): Promise<IUser> {
+  async create(data: CreateUserRequest): Promise<IUser> {
     const userAlreadyExit = await this.userRepository.readByEmail(data.email);
     if (userAlreadyExit != null) {
       throw new Error('user already exit');
@@ -31,7 +31,7 @@ export class UserService {
     };
   }
 
-  async read({ id }: ReadUserRequestParam): Promise<IUser> {
+  async read({ id }: ReadUserRequest): Promise<IUser> {
     const user = await this.userRepository.read(id);
     if (!user) {
       throw new Error('user not exist');
@@ -51,7 +51,7 @@ export class UserService {
     });
   }
 
-  async update(data: UpdateUserRequestBody): Promise<IUser> {
+  async update(data: UpdateUserRequest): Promise<IUser> {
     const userExit = await this.userRepository.read(data.id);
     if (!userExit) {
       throw new Error('user not exit');
@@ -79,7 +79,7 @@ export class UserService {
     };
   }
 
-  async updatePassword(data: UpdateUserPasswordRequestBody): Promise<void> {
+  async updatePassword(data: UpdateUserPasswordRequest): Promise<void> {
     const userExit = await this.userRepository.read(data.id);
 
     if (!userExit) {
@@ -107,7 +107,7 @@ export class UserService {
     await this.userRepository.updatePassword(updateUserData);
   }
 
-  async delete({ id }: DeleteUserRequestBody): Promise<void> {
+  async delete({ id }: DeleteUserRequest): Promise<void> {
     const userAlreadyExit = await this.userRepository.read(id);
     if (userAlreadyExit === undefined) {
       throw new Error('user not exist');
