@@ -100,3 +100,4 @@ Pronto suas requisições foram autenticadas
 
 Este projeto está licenciado sob a [Licença MIT](https://github.com/runnanC-137/login-with-nest-api/blob/main/LICENSE.txt).
 
+Feito com 💜 por [runnanC-137](https://github.com/runnanC-137) 👋 veja meu [linkedin](https://www.linkedin.com/in/ruan-vieira-04a9ab1b9/)
