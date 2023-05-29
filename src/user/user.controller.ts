@@ -30,11 +30,13 @@ export class UserController {
   @Post()
   async create(@Body() body: CreateUserRequest): Promise<IUser> {
     const user = await this.userService.create(body);
+    delete user.password;
     return user;
   }
 
   @Get()
   async readMe(@CurrentUser() user: IUser): Promise<IUser> {
+    delete user.password;
     return user;
   }
 
@@ -42,13 +44,17 @@ export class UserController {
   @Get('all')
   async readAll(): Promise<IUser[]> {
     const users = await this.userService.readAll();
-    return users;
+    return users.map((user) => {
+      delete user.password;
+      return user;
+    });
   }
 
   @IsPublic()
   @Get(':id')
   async read(@Param() params: ReadUserRequest): Promise<IUser> {
     const user = await this.userService.read(params);
+    delete user.password;
     return user;
   }
 
@@ -58,6 +64,7 @@ export class UserController {
     @CurrentUser() { id }: IUser,
   ): Promise<IUser> {
     const user = await this.userService.update({ email, id, name });
+    delete user.password;
     return user;
   }
   @Put('password')
@@ -75,6 +82,7 @@ export class UserController {
     @Param() { id }: ReadUserRequest,
   ): Promise<IUser> {
     const user = await this.userService.update({ email, id, name });
+    delete user.password;
     return user;
   }
   // adm route
