@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-export class UpdateUserRequest {
+export class UpdateUserInRequest {
   @ApiProperty({
     description: 'email usado para login de usuários',
     example: 'email@email.com',
@@ -10,15 +9,10 @@ export class UpdateUserRequest {
   @IsEmail() */
   email: string;
 
-  @IsNotEmpty()
-  @IsString()
-  id: string;
-
   @ApiProperty({
     description: 'nome do usuários',
     example: 'John Doe',
   })
-  /*   @IsString()
-  @IsEmail() */
+  /* @IsString() */
   name: string;
 }

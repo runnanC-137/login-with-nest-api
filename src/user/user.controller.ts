@@ -17,6 +17,8 @@ import { UserService } from 'src/user/user.service';
 import { IUser } from './interfaces/user.interface';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { UpdateUserInRequest } from './dtos/update-user-in-request.dto';
+import { UpdateUserPasswordInRequest } from './dtos/update-user-password-in-request.dto';
 
 @ApiTags('user')
 @ApiBearerAuth()
@@ -50,6 +52,22 @@ export class UserController {
     return user;
   }
 
+  @Put()
+  async updateMe(
+    @Body() { email, name }: UpdateUserInRequest,
+    @CurrentUser() { id }: IUser,
+  ): Promise<IUser> {
+    const user = await this.userService.update({ email, id, name });
+    return user;
+  }
+  @Put('password')
+  async updateMyPassword(
+    @Body() { newPassword, password }: UpdateUserPasswordInRequest,
+    @CurrentUser() { id }: IUser,
+  ): Promise<any> {
+    await this.userService.updatePassword({ id, newPassword, password });
+    return { message: 'password changed with success' };
+  }
   // adm route
   @Put(':id')
   async update(
@@ -69,6 +87,11 @@ export class UserController {
     return { message: 'password changed with success' };
   }
 
+  @Delete()
+  async deleteMe(@CurrentUser() { id }: IUser): Promise<any> {
+    await this.userService.delete({ id });
+    return { message: 'user deleted' };
+  }
   // adm route
   @Delete(':id')
   async delete(@Param() params: DeleteUserRequest): Promise<any> {

@@ -1,10 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, Length, Matches } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsString,
+  Length,
+  Matches,
+} from 'class-validator';
 
-export class UpdateUserPasswordRequest {
-  @IsNotEmpty()
-  id: string;
-
+export class UpdateUserPasswordInRequest {
   @ApiProperty({
     description: 'senha atual do usuário',
     example: 'SenhaForte',
